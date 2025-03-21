@@ -1,0 +1,14 @@
+sample:
+  name: Gas Detector
+tests:
+  sample.gas_detector:
+    harness: sensor
+    tags:
+      - samples
+      - sensor
+    integration_platforms:
+      - nrf5340dk/nrf5340/cpuapp/ns
+      - nrf52840dk/nrf52840
+    platform_allow:
+      - nrf5340dk/nrf5340/cpuapp/ns
+      - nrf52840dk/nrf52840
