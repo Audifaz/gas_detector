@@ -3,6 +3,7 @@
 #include <stdio.h>
 
 #include "sensor.h"
+#include "ble.h"
 
 LOG_MODULE_REGISTER(main_module, 4);
 
@@ -13,6 +14,12 @@ int main(void)
         err = sensor_init();
         if (err) {
                 LOG_ERR("sensor_init failed with error code %d\n", err);
+                return err;
+        }
+        
+        err = ble_init();
+        if (err) {
+                LOG_ERR("ble_init failed with error code %d\n", err);
                 return err;
         }
 
