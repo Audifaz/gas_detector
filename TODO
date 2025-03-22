@@ -1,0 +1,14 @@
+### Sensor
+- Get the better BME688 driver
+- Solve why it breaks in the nrf5340dk
+- Try for fun my own bme688 implementation with I2C
+- Why does the temperature tend to increment gradually?
+- Is the gas sensor broken?
+
+### Thingy53
+- Solve Warning that happen just by compiling this board
+
+### Communication
+- Send data through a notification/indication of BLE
+- Python app
+- Android app
