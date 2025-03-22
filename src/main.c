@@ -16,15 +16,6 @@ int main(void)
                 return err;
         }
 
-        while (1) {
-                k_sleep(K_MSEC(3000));
-                err = sensor_fetch();
-                if (err) {
-                        LOG_ERR("sensor_fetch failed with error code %d\n", err);
-                        // return err;
-                }
-
-        }
         return err;
 }
  
