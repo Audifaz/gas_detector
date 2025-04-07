@@ -3,6 +3,7 @@
 #include <zephyr/bluetooth/conn.h>
 #include <zephyr/bluetooth/uuid.h>
 #include <zephyr/bluetooth/gatt.h>
+
 #include <zephyr/logging/log.h>
 
 #include "ble.h"
@@ -11,6 +12,15 @@ LOG_MODULE_REGISTER(ble_module, 4);
 
 static bool notify_enabled = false;
 static bool button_state = false;
+
+#define DEVICE_NAME             CONFIG_BT_DEVICE_NAME
+#define DEVICE_NAME_LEN         (sizeof(DEVICE_NAME) - 1)
+
+static const struct bt_data ad[] = {
+	BT_DATA_BYTES(BT_DATA_FLAGS, (BT_LE_AD_GENERAL | BT_LE_AD_NO_BREDR)),
+	BT_DATA(BT_DATA_NAME_COMPLETE, DEVICE_NAME, DEVICE_NAME_LEN),
+};
+
 
 static void ccc_cfg_changed(const struct bt_gatt_attr *attr,
     uint16_t value)
@@ -50,6 +60,14 @@ int ble_init(void)
     err = bt_enable(NULL);
     if (err) {
         LOG_ERR("Bluetooth init failed with error code %d\n", err);
+        return err;
+    }
+
+    LOG_DBG("Bluetooth initialized\n");
+
+    err = bt_le_adv_start(BT_LE_ADV_CONN, ad, ARRAY_SIZE(ad), NULL, 0);
+    if (err){
+        LOG_ERR("Advertising failed to start (err %d)\n", err);
         return err;
     }
 

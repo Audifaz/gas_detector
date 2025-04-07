@@ -22,7 +22,7 @@ static void sample_fetch_fn(struct k_work *work){
                     humidity.val1, humidity.val2, gas_res.val1,
                     gas_res.val2);
     
-    k_work_reschedule(&sample_work, K_SECONDS(1));
+    k_work_reschedule(&sample_work, K_SECONDS(5));
 }
 
 int sensor_init(void)
